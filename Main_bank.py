@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from Url 		import Url
 from UrlBank 	import UrlBank
 
@@ -19,3 +20,10 @@ class UrlStuff():
 	    ub.printBank()
 
 	if  __name__ =='__main__':main()
+=======
+import crawler
+
+crawl = crawler.Crawler("http://people.f4.htw-berlin.de/fileadmin/user_upload/Dozenten/WI-Dozenten/Classen/DAWeb/smdocs/d01.html")
+
+crawl.crawl()
+>>>>>>> 6e30af1bfe7a624d94ca2528da2822a5a2743d1a
