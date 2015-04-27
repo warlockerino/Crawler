@@ -3,6 +3,20 @@ from Url import Url
 class UrlBank():
 	def __init__(self):
 		self.urls = {}
+		self.counter = 0
+
+	def addRoots(self, rootUrls):
+		for u in rootUrls:
+			counter += 1
+			self.addUrl(u)
+
+	# Since were doin it quick n dirty : 
+	def getNext(self):
+		if counter < len(urls):
+			return urls[counter]
+		else:
+			counter = 0
+			return 0
 
 	def addUrl(self, url):
 		if url.name not in self.urls:
