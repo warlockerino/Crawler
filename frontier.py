@@ -10,14 +10,6 @@ class Frontier(object):
  
 		self.found = set()
  
-		self._polite_time = 1
- 
-	def polite_time(self):
-		return self._polite_time
- 
-	def polite_time(self, seconds):
-		if seconds >= 0:
-			self._polite_time = seconds
  
 	def add(self, url):
 		if url in self.found:
@@ -48,7 +40,7 @@ class Frontier(object):
 		domain = urlparse.urlparse(url).netloc
  
 		if domain in self.urls:
-			heapq.heappush(self.crawltimes, (time.time() + self.polite_time, domain))
+			heapq.heappush(self.crawltimes, (time.time(), domain))
  
 	def __len__(self):
 		return sum([len(self.urls[domain]) for domain in self.urls])

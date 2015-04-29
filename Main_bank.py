@@ -1,29 +1,22 @@
-<<<<<<< HEAD
-from Url 		import Url
-from UrlBank 	import UrlBank
+from Crawler import Crawler
+from Url import Url
+from UrlBank import UrlBank
+from PageRank import PageRank
 
-class UrlStuff():	
-	def main():
-	    
-	    u1 = Url("reddit.com", ["google.de", "xkcd.com", "google.de"], "random html")
-	    u2 = Url("oracle.com", ["reddit.com","google.de","xkcd.com"], "rand html")
-	    u3 = Url("google.de", ["reddit.com","reddit.com", "oracle.com"], "some html created in Django")
-	    u4 = Url("xkcd.com", ["reddit.com"], "some very simple html")
+def main():
 
-	    ub = UrlBank()
-	    
-	    ub.addUrl(u1)
-	    ub.addUrl(u2)
-	    ub.addUrl(u3)
-	    ub.addUrl(u4)
+	crawler = Crawler([
+		"http://people.f4.htw-berlin.de/fileadmin/user_upload/Dozenten/WI-Dozenten/Classen/DAWeb/smdocs/d01.html",
+		"http://people.f4.htw-berlin.de/fileadmin/user_upload/Dozenten/WI-Dozenten/Classen/DAWeb/smdocs/d06.html",
+		"http://people.f4.htw-berlin.de/fileadmin/user_upload/Dozenten/WI-Dozenten/Classen/DAWeb/smdocs/d08.html"
+	])
+	crawler.crawl()
+	bank = crawler.getUrlBank()
 
-	    ub.printBank()
+	#bank.printBank()
+	rank = PageRank(bank, 0.95, 0.04)
+	rank.calculate()
+	rank.bank.printBank()
 
-	if  __name__ =='__main__':main()
-=======
-import crawler
-
-crawl = crawler.Crawler("http://people.f4.htw-berlin.de/fileadmin/user_upload/Dozenten/WI-Dozenten/Classen/DAWeb/smdocs/d01.html")
-
-crawl.crawl()
->>>>>>> 6e30af1bfe7a624d94ca2528da2822a5a2743d1a
+if __name__ == "__main__":
+    main()

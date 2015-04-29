@@ -1,17 +1,13 @@
-
 class Url():
 	def __init__(self, link, outgoing, html):
-		
 		self.name 		= link
 		self.outLinks 	= {}
 		self.incoming	= {}
 		self.content	= html
+		self.pageRank   = 1
 		for ol in outgoing:
 			self.addOut(ol)
 
-
-
-		
 	def addIn(self, host):
 		if host in self.incoming:
 			self.incoming[host] += 1
@@ -37,7 +33,6 @@ class Url():
 
 	def printCon(self):
 		print self.name
-		print "outgoing :",self.outLinks
-		print "incoming :",self.incoming
-
-	
+		print "outgoing :",len(self.outLinks)
+		print "incoming :",len(self.incoming)
+		print("Pagerank: %.4f" % self.pageRank),"\n"
