@@ -1,4 +1,4 @@
-from Crawler import Crawler
+from crawler import Crawler
 from Url import Url
 from UrlBank import UrlBank
 from PageRank import PageRank

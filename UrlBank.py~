@@ -7,11 +7,6 @@ class UrlBank():
 		self.counter = 0
 		self.toCrawl = []
 
-	def addRoots(self, rootUrls):
-		for u in rootUrls:
-			self.counter += 1
-			self.addUrl(u)
-
 	def add(self, url):
 		if url in self.toCrawl:
 			return False
