@@ -8,30 +8,48 @@ class PageRank():
 		self.stop = stop
 		self.teleportation = 1-self.dumping
 		self.cstop = 1
+		tmpprs = {}
+		for url in self.bank.urls.itervalues():
+			tmpprs[url.name] = 1/float(len(self.bank.urls))
+		self.setPageranks(tmpprs)
+		self.printHeader()
+		self.printStep(0, tmpprs, 0)
 
 	def calculate(self):
 		step = 0
 		while (self.stop <= self.cstop):
-			print "step",step
 			totalpr = 0
+			tmpprs = {}
 			for url in self.bank.urls.itervalues():
-				pr = float(1)
-				if (step == 0):
-					pr = 1/float(len(self.bank.urls))
-				else:
-					pr = (self.teleportation/float(len(self.bank.urls)))
-					linkjuice = 0
-					for inLink in url.incoming:
-						incomingUrl = self.bank.getUrl(inLink)
-						linkjuice += incomingUrl.pageRank/float(len(incomingUrl.outLinks))
-					for exit in self.bank.urls.itervalues():
-						if (len(exit.outLinks) == 0):
-							linkjuice += exit.pageRank/float(len(self.bank.urls))
-					tmppr = pr
-					pr = pr + self.dumping * linkjuice
-					print "PR for ",url.name,"=",tmppr,"+ (",self.dumping,"*",linkjuice,") =",pr
+				linkjuice = 0
+				for inLink in url.incoming:
+					incomingUrl = self.bank.getUrl(inLink)
+					linkjuice += incomingUrl.pageRank/float(len(incomingUrl.outLinks))
+				for exit in self.bank.urls.itervalues():
+					if (len(exit.outLinks) == 0):
+						linkjuice += exit.pageRank/float(len(self.bank.urls))
+				pr = (self.teleportation/float(len(self.bank.urls))) + self.dumping * linkjuice
 				totalpr += abs(pr - url.pageRank)
-				url.pageRank = pr
+				tmpprs[url.name] = pr
 			step+=1
 			self.cstop = totalpr
-			print "Current stop value:",self.cstop
+			self.printStep(step, tmpprs, self.cstop)
+			self.setPageranks(tmpprs)
+
+	def setPageranks(self, prs):
+		for url in self.bank.urls.itervalues():
+			url.pageRank = prs[url.name]
+
+	def printHeader(self):
+		print("%9s" % ("")),
+		for url in self.bank.urls.itervalues():
+			print("%5s%1s" % (url.name[-8:-5], "")),
+		print("%7s" % ("diff")),
+
+	def printStep(self, step, prs, diff):
+		print("\n%s: %d [" % ("step", step)),
+		for key in sorted(prs.iterkeys()):
+			print("%.4f" % (prs[key])),
+		print "]",
+		if (diff != 0):
+			print("%.4f" % (diff)),
