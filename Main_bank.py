@@ -11,7 +11,7 @@ def main():
 		"http://people.f4.htw-berlin.de/fileadmin/user_upload/Dozenten/WI-Dozenten/Classen/DAWeb/smdocs/d08.html"
 	])
 	crawler.crawl()
-	bank = crawler.getUrlBank()
+	bank = crawler.get_Bank()
 
 	#bank.printBank()
 	rank = PageRank(bank, 0.95, 0.04)
