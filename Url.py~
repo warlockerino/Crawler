@@ -23,9 +23,6 @@ class Url():
 		else:
 			self.outLinks[dest] = 1
 
-	def setTokens(self, tokens):
-		self.tokens = tokens
-
 	def notify(self, newLinks, newSide):
 		counter = 0
 		if self.name in newLinks:

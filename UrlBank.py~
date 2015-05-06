@@ -3,17 +3,17 @@ from Url import Url
 class UrlBank():
 	def __init__(self):
 		self.urls = {}
-		self.counter = 0
+		self.counter = -1
 
 	def addRoots(self, rootUrls):
 		for u in rootUrls:
-			self.counter += 1
+			counter += 1
 			self.addUrl(u)
 
 	# Since were doin it quick n dirty : 
 	def getNext(self):
-		if self.counter < len(self.urls):
-			return self.urls[self.counter - 1]
+		if counter < len(urls):
+			return urls[counter]
 		else:
 			counter = 0
 			return 0

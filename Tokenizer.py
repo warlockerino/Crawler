@@ -10,10 +10,16 @@ class Tokenizer():
 	def addUrl(self, url):
 		self.name 		= url.name
 		self.content 	= url.content
+		# Transform to lower case
 		self.content 	= self.content.lower()
+
+		# Replacing all kinds of symbols with whitespace
 		self.content 	= self.content.replace(".", " ")
 		self.content 	= self.content.replace(";", " ")
 		self.content 	= self.content.replace(",", " ")
+		self.content 	= self.content.replace("/", " ")
+		self.content 	= self.content.replace("&", " ")
+		self.content 	= self.content.replace("|", " ")
 		self.content 	= self.content.split()
 
 		tmpTokens = {}
@@ -29,6 +35,10 @@ class Tokenizer():
 
 			self.tokens[self.name] = tmpTokens
 	
+
+	def search(self, term):
+		pass 
+
 	def printMap(self):
 		print self.tokens		
 
