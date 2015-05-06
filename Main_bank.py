@@ -11,11 +11,13 @@ def main():
 		"http://people.f4.htw-berlin.de/fileadmin/user_upload/Dozenten/WI-Dozenten/Classen/DAWeb/smdocs/d08.html"
 	])
 	crawler.crawl()
-	bank = crawler.get_Bank()
+	bank = crawler.get_bank()
 
+	bank.sortBank()
 	#bank.printBank()
 	rank = PageRank(bank, 0.95, 0.04)
 	rank.calculate()
+
 	rank.bank.printBank()
 
 if __name__ == "__main__":
