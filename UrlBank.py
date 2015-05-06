@@ -34,3 +34,6 @@ class UrlBank():
 		if (self.urls.get(url)):
 			return self.urls.get(url)
 		return 0
+
+	def sortBank(self):
+		self.urls = collections.OrderedDict(sorted(self.urls.items()))
