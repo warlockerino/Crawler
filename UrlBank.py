@@ -1,21 +1,34 @@
 from Url import Url
+import collections
 
 class UrlBank():
 	def __init__(self):
 		self.urls = {}
 		self.counter = 0
+		self.toCrawl = []
 
-	def addRoots(self, rootUrls):
-		for u in rootUrls:
+	def add(self, url):
+		if url in self.toCrawl:
+			return False
+		
+		else:
+			self.toCrawl.append(url)
+	
+	def next(self):
+		if self.counter == len(self.toCrawl):
+			self.counter = 0			
+			return False
+
+		else:
 			self.counter += 1
-			self.addUrl(u)
+			return self.toCrawl[self.counter-1]
 
 	# Since were doin it quick n dirty : 
 	def getNext(self):
 		if self.counter < len(self.urls):
-			return self.urls[self.counter - 1]
+			return self.urls[self.counter].name
 		else:
-			counter = 0
+			self.counter = 0
 			return 0
 
 	def addUrl(self, url):

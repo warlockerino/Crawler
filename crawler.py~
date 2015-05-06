@@ -10,7 +10,8 @@ class Crawler:
 		self.bank = UrlBank()		
 
 		for init in init_urls:
-			self.bank.add(init)			
+			self.bank.add(init)
+			
 
 	def crawl(self):
 		while len(self.bank.toCrawl) > self.bank.counter:
