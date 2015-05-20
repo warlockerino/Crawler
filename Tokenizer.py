@@ -42,6 +42,29 @@ class Tokenizer():
 	def printMap(self):
 		print self.tokens		
 
+	def tokenize(self, term):
+		term = term.lower()
+		term = term.replace(".", " ")
+		term = term.replace(";", " ")
+		term = term.replace(",", " ")
+		term = term.replace("/", " ")
+		term = term.replace("&", " ")
+		term = term.replace("!", " ")
+		term = term.split()
+
+		return term
+
+	def sortTokens(self, termlist):
+		tmpTokens = {}
+		for t in termlist:
+			if t not in tmpTokens:
+				tmpTokens[t] = 1
+			else:
+				tmpTokens[t] += 1
+
+		return tmpTokens
+
+		
 
 
 
