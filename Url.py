@@ -1,3 +1,5 @@
+from Tokenizer import Tokenizer 
+
 class Url():
 	def __init__(self, link, outgoing, html):
 		self.name 		= link
@@ -5,7 +7,9 @@ class Url():
 		self.incoming	= {}
 		self.content	= html
 		self.pageRank   = 1
-		self.tokens 	= {}
+		t	 			= Tokenizer(self.content) 
+		self.tokens 	= t.getTokens()
+		
 		for ol in outgoing:
 			self.addOut(ol)
 
@@ -23,8 +27,8 @@ class Url():
 		else:
 			self.outLinks[dest] = 1
 
-	def setTokens(self, tokens):
-		self.tokens = tokens
+	def getTokens(self):
+		return self.tokens
 
 	def notify(self, newLinks, newSide):
 		counter = 0
@@ -40,3 +44,4 @@ class Url():
 		print "outgoing :",len(self.outLinks)
 		print "incoming :",len(self.incoming)
 		print("Pagerank: %.4f" % self.pageRank),"\n"
+		print self.tokens

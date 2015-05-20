@@ -4,7 +4,6 @@ import urllib2, httplib, urlparse
 from Url import Url
 from UrlBank import UrlBank
 
-
 class Crawler:
 	def __init__(self, init_urls):
 		self.bank = UrlBank()		

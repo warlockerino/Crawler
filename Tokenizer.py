@@ -1,17 +1,16 @@
 class Tokenizer():
-	def __init__(self):
+	def __init__(self, content):
 		self.tokens = {}
 		self.stopWords = ['d01', 'd02', 'd03', 'd04', 'd05', 'd06', 'd07', 'd08',  
 'a', 'also', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'do',
 'for', 'have', 'is', 'in', 'it', 'of', 'or', 'see', 'so',
 'that', 'the', 'this', 'to', 'we']
-	
+		self.addUrl(content)
+
+
 	# ADD URL ELEMENT TO UPDATE ITS TOKENS
-	def addUrl(self, url):
-		self.name 		= url.name
-		self.content 	= url.content
-		# Transform to lower case
-		self.content 	= self.content.lower()
+	def addUrl(self, content):
+		self.content 	= content.lower()
 
 		# Replacing all kinds of symbols with whitespace
 		self.content 	= self.content.replace(".", " ")
@@ -22,19 +21,17 @@ class Tokenizer():
 		self.content 	= self.content.replace("|", " ")
 		self.content 	= self.content.split()
 
-		tmpTokens = {}
-		if self.name not in self.tokens:
-			for t in self.content:
-				if t not in self.stopWords:
-					if t not in tmpTokens:
-						tmpTokens[t] = 1
-					else:
-						tmpTokens[t] += 1
-
-
-
-			self.tokens[self.name] = tmpTokens
+		for t in self.content:
+			if t not in self.stopWords:
+				if t not in self.tokens:
+					self.tokens[t] = 1
+				else: 
+					self.tokens[t] += 1
 	
+
+	def getTokens(self):
+		return self.tokens
+
 
 	def search(self, term):
 		pass 
@@ -54,15 +51,15 @@ class Tokenizer():
 
 		return term
 
-	def sortTokens(self, termlist):
+	def sortTokens(self):
 		tmpTokens = {}
-		for t in termlist:
+		for t in self.tokens:
 			if t not in tmpTokens:
 				tmpTokens[t] = 1
 			else:
 				tmpTokens[t] += 1
 
-		return tmpTokens
+		self.tokens = tmpTokens
 
 		
 
