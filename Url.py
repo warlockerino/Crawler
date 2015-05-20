@@ -3,6 +3,7 @@ from Tokenizer import Tokenizer
 class Url():
 	def __init__(self, link, outgoing, html):
 		self.name 		= link
+		self.title 		= self.name[-8:-5]
 		self.outLinks 	= {}
 		self.incoming	= {}
 		self.content	= html
