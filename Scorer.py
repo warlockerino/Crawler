@@ -27,7 +27,7 @@ class Scorer():
 	def calc_weight(self, tf, dtf):
 		return tf * dtf
 
-	def calc_score(self, w_t_q, w_t_d):
+	def calc_score(self, w_t_qbb, w_t_d):
 		score = (w_t_q * w_t_d) / (math.sqrt(math.pow(w_t_q, 2)) * math.sqrt(math.pow(w_t_d,2)))
 
 	def search_token(self, tokens, term):

@@ -21,7 +21,7 @@ class UrlBank():
 
 		else:
 			self.counter += 1
-			return self.toCrawl[self.counter-1]
+			return self.toCrawl[self.counter - 1]
 
 	# Since were doin it quick n dirty : 
 	def getNext(self):
