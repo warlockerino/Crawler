@@ -1,5 +1,5 @@
 from UrlBank 	import UrlBank
-from Url 	import Url
+from Url 		import Url
 from Tokenizer	import Tokenizer
 
 class Scorer():

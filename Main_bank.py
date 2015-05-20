@@ -13,6 +13,7 @@ def main():
 		"http://people.f4.htw-berlin.de/fileadmin/user_upload/Dozenten/WI-Dozenten/Classen/DAWeb/smdocs/d08.html"
 	])
 	crawler.crawl()
+
 	s  = Scorer()
 	bank = crawler.get_bank()
 
@@ -22,14 +23,14 @@ def main():
 	rank.calculate()
 
 	rank.bank.printBank()
-	t 	= Tokenizer()
-	duh = t.tokenize("Hi there! Whats up Hi")
-	print "DUH:"
-	print duh
-	duh_2 = t.sortTokens(duh)
-	print "---------"
-	print duh_2
-	
+#	t 	= Tokenizer()
+
+#	duh = t.tokenize("Hi there! Whats up Hi")
+#	print "DUH:"
+#	print duh
+#	duh_2 = t.sortTokens(duh)
+#	print "---------"
+#	print duh_2
 
 
 if __name__ == "__main__":
