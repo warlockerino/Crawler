@@ -14,8 +14,8 @@ class Index():
 				self.index[ token ].addUrl( url )
 
 	def printIndex(self):
-		for token in self.index.iterkeys():
-			print "\n",token,"=",
+		for token in sorted(self.index.iterkeys()):
+			print("(%s, df:%s) ->" % (token, self.getDocumentFrequency(token))),
 			self.index[ token ].printToken()
 
 	def getDocumentFrequency(self, token):

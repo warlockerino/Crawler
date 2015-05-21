@@ -13,5 +13,8 @@ class IndexToken():
 			self.urlList[ url.title ] = tmp_tokens[ self.token ]
 
 	def printToken(self):
+		printable = "[";
 		for url in self.urlList.iterkeys():
-			print url, " -> ", self.urlList[ url ],",",
+			printable += "(%s, %s), " % ( url, self.urlList[ url ] )
+		printable = printable[:-2] + "]"
+		print printable
