@@ -19,6 +19,8 @@ class Tokenizer():
 		self.content 	= self.content.replace("/", " ")
 		self.content 	= self.content.replace("&", " ")
 		self.content 	= self.content.replace("|", " ")
+		self.content 	= self.content.replace("\"", " ")
+		self.content 	= self.content.replace("-", " ")
 		self.content 	= self.content.split()
 
 		for t in self.content:

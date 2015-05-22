@@ -43,7 +43,7 @@ class PageRank():
 	def printHeader(self):
 		print("%9s" % ("")),
 		for url in self.bank.urls.itervalues():
-			print("%5s%1s" % (url.name[-8:-5], "")),
+			print("%5s%1s" % (url.title, "")),
 		print("%7s" % ("diff")),
 
 	def printStep(self, step, prs, diff):

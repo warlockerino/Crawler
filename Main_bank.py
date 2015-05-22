@@ -3,6 +3,7 @@ from Url 		import Url
 from UrlBank 	import UrlBank
 from PageRank 	import PageRank
 from Tokenizer 	import Tokenizer
+from Index 		import Index
 from Scorer 	import Scorer
 
 def main():
@@ -21,6 +22,9 @@ def main():
 	#bank.printBank()
 	rank = PageRank(bank, 0.95, 0.04)
 	rank.calculate()
+
+	i = Index( bank )
+	i.printIndex()
 
 	rank.bank.printBank()
 #	t 	= Tokenizer()
