@@ -7,6 +7,11 @@ class UrlBank():
 		self.counter = 0
 		self.toCrawl = []
 
+	def printOutgoing(self):
+		for u in self.urls:
+			self.urls[u].printOut()
+			print "-.--------------------------------------------------------------------------------"
+
 	def add(self, url):
 		if url in self.toCrawl:
 			return False

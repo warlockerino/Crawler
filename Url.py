@@ -40,6 +40,12 @@ class Url():
 			counter = self.outLinks[newSide]
 		return counter
 
+	def printOut(self):
+		#print self.outLinks
+		for o in self.outLinks:
+			u = o.replace("/", " ")
+			u = u.split()
+			print u[-1]
 	def printCon(self):
 		print self.name
 		print "outgoing :",len(self.outLinks)

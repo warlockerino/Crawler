@@ -27,6 +27,8 @@ def main():
 	i.printIndex()
 
 	rank.bank.printBank()
+
+	bank.printOutgoing()
 #	t 	= Tokenizer()
 
 #	duh = t.tokenize("Hi there! Whats up Hi")
