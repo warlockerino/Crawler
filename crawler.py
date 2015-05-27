@@ -27,7 +27,7 @@ class Crawler:
 		if response != None:	
 			typ = response.read()
 			outLinks = self.extract_outgoing_links(typ, url)
-			page = Url(url, outLinks, self.extract_text(typ))
+			page = Url(url, self.extract_title(typ), outLinks, self.extract_text(typ))
 			
 			for out in outLinks:
 				self.bank.add(out)
@@ -42,6 +42,12 @@ class Crawler:
 			links.append(urlparse.urljoin(url, link.get('href')))
 
 		return links
+
+	def extract_title(self, html):
+		soup = BeautifulSoup(html)
+		title = soup.title.string
+
+		return title
 
 	#
 	def extract_text(self, html):

@@ -1,9 +1,9 @@
 from Tokenizer import Tokenizer 
 
 class Url():
-	def __init__(self, link, outgoing, html):
+	def __init__(self, link, pagetitle, outgoing, html):
 		self.name 		= link
-		self.title 		= self.name[-8:-5]
+		self.title 		= pagetitle
 		self.outLinks 	= {}
 		self.incoming	= {}
 		self.content	= html
@@ -17,9 +17,8 @@ class Url():
 	def addIn(self, host):
 		if host in self.incoming:
 			self.incoming[host] += 1
-			print host, "++"
+
 		else:
-			print host," added"
 			self.incoming[host] = 1 
 
 	def addOut(self, dest):
@@ -41,13 +40,14 @@ class Url():
 		return counter
 
 	def printOut(self):
-		#print self.outLinks
+		print self.title + ":"
 		for o in self.outLinks:
 			u = o.replace("/", " ")
 			u = u.split()
 			print u[-1]
+
 	def printCon(self):
-		print self.name
+		print self.title
 		print "outgoing :",len(self.outLinks)
 		print "incoming :",len(self.incoming)
 		print("Pagerank: %.4f" % self.pageRank),"\n"

@@ -19,14 +19,17 @@ def main():
 	bank = crawler.get_bank()
 
 	bank.sortBank()
-	#bank.printBank()
+
+	print 'Page Ranks: \n'
 	rank = PageRank(bank, 0.95, 0.04)
 	rank.calculate()
 
+	print '\nIndex: \n'
 	i = Index( bank )
 	i.printIndex()
 
-	rank.bank.printBank()
+	print '\nLinkstruktur: \n' 
+#	rank.bank.printBank()
 
 	bank.printOutgoing()
 #	t 	= Tokenizer()
