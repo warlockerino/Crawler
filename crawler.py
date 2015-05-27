@@ -52,7 +52,7 @@ class Crawler:
 	#
 	def extract_text(self, html):
 		soup = BeautifulSoup(html)
-		text = soup.get_text()
+		text = soup.body.get_text()
 		
 		return text
 

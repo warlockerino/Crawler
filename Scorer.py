@@ -15,16 +15,17 @@ class Scorer():
 
 		tcounts = {}
 		lengths = {}
+		tlengths = 0
 
 		for t in self.tokens.getTokens():
+			
 			if t not in tcounts:
 				tcounts[ t ] = 0
 			tcounts[ t ] += 1
 
 		for t in self.tokens.getTokens():
-			
 			it = self.index.getIndexToken( t )
-			
+		
 			tcount = 0
 			for d in it.urlList.iterkeys():
 				tcount += it.urlList[ d ]
@@ -34,7 +35,6 @@ class Scorer():
 			for d in it.urlList.iterkeys():
 				
 				tf = ( 1 + math.log10( it.urlList[ d ] ) )
-
 				wtq = tf * dtf
 				wtd = ( 1 + math.log10( tcounts[ t ] ) ) * dtf
 				
@@ -44,17 +44,27 @@ class Scorer():
 				self.ranking[ d ] += ( wtq * wtd ) / ( math.sqrt( math.pow( wtq, 2 ) ) * math.sqrt( math.pow( wtd, 2 ) ) )
 
 		for i in self.index.index:
-			for d in self.index.index[ i ].urlList.iterkeys():
+			urls = self.index.index[ i ].urlList
+			for d in urls.iterkeys():
 				if d not in lengths:
 					lengths[ d ] = 0
-				lengths[ d ] += ( 1 + math.log10( self.index.index[ i ].urlList[ d ] ) ) * math.log10( float( len( self.index.bank.urls ) ) / float( self.index.getDocumentFrequency( i ) ) )
+				lengths[ d ] += math.pow( ( 1 + math.log10( urls[ d ] ) ) * math.log10( float( len( self.index.bank.urls ) ) / float( self.index.getDocumentFrequency( i ) ) ), 2 )
 
-		for d in self.ranking:
+		print "\nDokumentenlaengen:\n"
+
+		for d in lengths:
 			lengths[ d ] = math.sqrt( lengths[ d ] )
-			self.ranking[ d ] = self.ranking[ d ] / lengths[ d ]
+			print("%.6f" % (lengths[d]))
+
+		for t in self.tokens.getTokens():
+			tlengths += math.pow( ( 1 + math.log10( tcounts[ t ] ) ) * math.log10( float( len( self.index.bank.urls ) ) / float( self.index.getDocumentFrequency( i ) ) ), 2 )
+
+		tlengths = math.sqrt( tlengths )
 
 		for d in self.ranking:
-			print "length: ", lengths[ d ]
+			self.ranking[ d ] = self.ranking[ d ] / ( lengths[ d ] * tlengths )
+
+		for d in self.ranking:
 			print d, ": ", self.ranking[d]
 
 	def calc_tf(self):
