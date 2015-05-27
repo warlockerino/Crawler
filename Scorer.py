@@ -1,12 +1,63 @@
 from UrlBank 	import UrlBank
-from Url 	import Url
+from Url 		import Url
 from Tokenizer	import Tokenizer
+from Index		import Index
+import math
 
 class Scorer():
-	def __init__(self):
-		pass 
+	def __init__(self, phrase, index):
+		self.tokens = Tokenizer( phrase )
+		self.index = index
+		self.ranking = {}
+		self.calc_ranking()
 
-	def calc_tf(self, tokens, term):
+	def calc_ranking(self):
+
+		tcounts = {}
+		lengths = {}
+
+		for t in self.tokens.getTokens():
+			if t not in tcounts:
+				tcounts[ t ] = 0
+			tcounts[ t ] += 1
+
+		for t in self.tokens.getTokens():
+			
+			it = self.index.getIndexToken( t )
+			
+			tcount = 0
+			for d in it.urlList.iterkeys():
+				tcount += it.urlList[ d ]
+
+			dtf = math.log10( float( len( self.index.bank.urls ) ) / float( self.index.getDocumentFrequency( t ) ) )
+
+			for d in it.urlList.iterkeys():
+				
+				tf = ( 1 + math.log10( it.urlList[ d ] ) )
+
+				wtq = tf * dtf
+				wtd = ( 1 + math.log10( tcounts[ t ] ) ) * dtf
+				
+				if d not in self.ranking:
+					self.ranking[ d ] = 0
+
+				self.ranking[ d ] += ( wtq * wtd ) / ( math.sqrt( math.pow( wtq, 2 ) ) * math.sqrt( math.pow( wtd, 2 ) ) )
+
+		for i in self.index.index:
+			for d in self.index.index[ i ].urlList.iterkeys():
+				if d not in lengths:
+					lengths[ d ] = 0
+				lengths[ d ] += ( 1 + math.log10( self.index.index[ i ].urlList[ d ] ) ) * math.log10( float( len( self.index.bank.urls ) ) / float( self.index.getDocumentFrequency( i ) ) )
+
+		for d in self.ranking:
+			lengths[ d ] = math.sqrt( lengths[ d ] )
+			self.ranking[ d ] = self.ranking[ d ] / lengths[ d ]
+
+		for d in self.ranking:
+			print "length: ", lengths[ d ]
+			print d, ": ", self.ranking[d]
+
+	def calc_tf(self):
 		tf = self.search_token(tokens, term)
 		tf = (1 + math.log10(tf)) 
 		return tf

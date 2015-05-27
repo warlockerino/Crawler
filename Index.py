@@ -22,3 +22,8 @@ class Index():
 		if token in self.index:
 			return len(self.index[ token ].urlList)
 		return 0
+
+	def getIndexToken(self, token):
+		if token in self.index:
+			return self.index[ token ]
+		return 0

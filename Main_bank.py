@@ -15,7 +15,7 @@ def main():
 	])
 	crawler.crawl()
 
-	s  = Scorer()
+	#s  = Scorer()
 	bank = crawler.get_bank()
 
 	bank.sortBank()
@@ -27,6 +27,8 @@ def main():
 	print '\nIndex: \n'
 	i = Index( bank )
 	i.printIndex()
+
+	s = Scorer( 'tokens', i )
 
 	print '\nLinkstruktur: \n' 
 #	rank.bank.printBank()
