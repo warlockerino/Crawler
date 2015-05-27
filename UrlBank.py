@@ -8,9 +8,11 @@ class UrlBank():
 		self.toCrawl = []
 
 	def printOutgoing(self):
-		for u in self.urls:
-			self.urls[u].printOut()
-			print "-.--------------------------------------------------------------------------------"
+		printable = ""
+		for u in sorted( self.urls ):
+			printable += "%s:" % (self.urls[ u ].title);
+			printable += self.urls[u].printOut() + "\n"
+		print (printable)
 
 	def add(self, url):
 		if url in self.toCrawl:

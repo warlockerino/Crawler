@@ -15,34 +15,33 @@ def main():
 	])
 	crawler.crawl()
 
-	#s  = Scorer()
 	bank = crawler.get_bank()
-
 	bank.sortBank()
 
-	print 'Page Ranks: \n'
+	print '\nLinkstruktur: \n' 
+	bank.printOutgoing()
+
+	print '\nPageRanks:'
 	rank = PageRank(bank, 0.95, 0.04)
 	rank.calculate()
 
-	print '\nIndex: \n'
+	print '\n\nIndex: \n'
 	i = Index( bank )
 	i.printIndex()
 
 	s = Scorer( 'tokens', i )
-
-	print '\nLinkstruktur: \n' 
-#	rank.bank.printBank()
-
-	bank.printOutgoing()
-#	t 	= Tokenizer()
-
-#	duh = t.tokenize("Hi there! Whats up Hi")
-#	print "DUH:"
-#	print duh
-#	duh_2 = t.sortTokens(duh)
-#	print "---------"
-#	print duh_2
-
+	
+	print '\nDokumentenlaenge: \n'
+	s.printDocumentLength()
+	
+	print '\nSuchergebnisse: \n'
+	s.printScoring()
+	s = Scorer( 'index', i )
+	s.printScoring()
+	s = Scorer( 'classification', i )
+	s.printScoring()
+	s = Scorer( 'tokens classification', i )
+	s.printScoring()
 
 if __name__ == "__main__":
     main()

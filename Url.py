@@ -40,11 +40,13 @@ class Url():
 		return counter
 
 	def printOut(self):
-		print self.title + ":"
+		printable = ""
 		for o in self.outLinks:
 			u = o.replace("/", " ")
 			u = u.split()
-			print u[-1]
+			printable += "%s," % (u[-1].replace(".html", ""))
+		printable = printable[:-1]
+		return printable
 
 	def printCon(self):
 		print self.title
